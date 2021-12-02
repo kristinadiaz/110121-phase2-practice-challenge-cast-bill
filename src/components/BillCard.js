@@ -1,6 +1,8 @@
 import React from 'react';
 
 const BillCard = ({ bill }) => {
+  const { name, health, salary, rating, catchphrase, photo } = bill;
+
   return (
     <div className="ui column">
       <div
@@ -9,26 +11,26 @@ const BillCard = ({ bill }) => {
         onClick={() => console.log('add code to connect event listener')}
       >
         <div className="image">
-          <img alt={bill.name} src={bill.photo} />
+          <img alt={name} src={photo} />
         </div>
         <div className="content">
           <div className="header">{bill.name}</div>
           <div className="meta text-wrap">
-            <small>{bill.catchphrase}</small>
+            <small>{catchphrase}</small>
           </div>
         </div>
         <div className="extra content">
           <span>
             <i className="icon heartbeat" />
-            {bill.health}
+            {health}
           </span>
           <span>
             <i className="icon dollar" />
-            {bill.salary}
+            {salary}
           </span>
           <span>
             <i className="icon star" />
-            {bill.rating}
+            {rating}
           </span>
           <span>
             <div className="ui center aligned segment basic">

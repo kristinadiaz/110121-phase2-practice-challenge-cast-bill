@@ -34,9 +34,9 @@ const BillCard = ({ bill, handleClick, fireBill }) => {
             <div className="ui center aligned segment basic">
               <button
                 className="ui mini blue button"
-                onClick={(event) => {
-                  event.stopPropagation();
-                  fireBill(bill)
+                onClick={(e) => {
+                  e.stopPropagation();
+                  fireBill(bill);
                 }
               }
               >
@@ -51,3 +51,4 @@ const BillCard = ({ bill, handleClick, fireBill }) => {
 };
 
 export default BillCard;
+

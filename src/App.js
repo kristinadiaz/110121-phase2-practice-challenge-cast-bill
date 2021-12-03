@@ -9,24 +9,27 @@ export default function App() {
 
   useEffect(() => {
     fetch(API)
-      .then(res => res.json())
-      .then(json => setBills(json))
+    .then(res => res.json())
+    .then(json => setBills(json))
   }, []);
-  
-  function castBill(bill, isCast = true) {
-    setBills(bills.map((b) => (b.id === bill.id ? {...b, cast: isCast} : b)));
-  }
 
-  function fireBill(bill) {
-    setBills(bills.filter(b => b.id !== bill.id));
-  }
+   function castBill(bill) {
+     setBills(bills.map((b) => (b.id === bill.id ? {...b, cast: true} : b)))
+   }
+
+   function removeBill(bill) {
+    setBills(bills.map((b) => (b.id === bill.id ? {...b, cast: false} : b)))
+   }
+
+   function fireBill(bill) {
+    setBills(bills.filter((b) => b.id !== bill.id))
+     }
+   
 
   return (
     <div>
-      <BillsCast 
-      bills={bills.filter(b => b.cast)} 
-      removeBill={(bill) => castBill(bill, false)}  fireBill={fireBill}/>
-      <BillCollection bills={bills} castBill={castBill} fireBill={fireBill}/>
+      <BillsCast bills={bills} removeBill={removeBill} fireBill={fireBill} />
+      <BillCollection bill={bills} castBill={castBill} fireBill={fireBill} />
     </div>
   );
 }

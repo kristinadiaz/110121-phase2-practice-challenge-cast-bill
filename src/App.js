@@ -4,37 +4,29 @@ import BillsCast from './components/BillsCast';
 
 const API = 'http://localhost:8002/bills';
 
- function App() {
+export default function App() {
   const [bills, setBills] = useState([]);
 
-  useEffect(
-    () => {
-      fetch(API)
-        .then(res => res.json())
-        .then(json => setBills(json))
-    }, []
-  );
+  useEffect(() => {
+    fetch(API)
+      .then(res => res.json())
+      .then(json => setBills(json))
+  }, []);
+  
+  function castBill(bill, isCast = true) {
+    setBills(bills.map((b) => (b.id === bill.id ? {...b, cast: isCast} : b)));
+  }
 
-  function clickBill(cast) {
-    if (cast.enlist) {
-      return;
-    }
-
-    setBills(
-      bills.map(b => b.id === cast.id ? {...cast, enlist: true} : b)
-    )
-
-    // console.log('hello');
-    // if enlist = true
-    // add enlist to BillsCast
+  function fireBill(bill) {
+    setBills(bills.filter(b => b.id !== bill.id));
   }
 
   return (
     <div>
-      <BillsCast casts={bills.filter(b => b.enlist)}/>
-      <BillCollection bill={bills} clickBill={clickBill}/>
+      <BillsCast 
+      bills={bills.filter(b => b.cast)} 
+      removeBill={(bill) => castBill(bill, false)}  fireBill={fireBill}/>
+      <BillCollection bills={bills} castBill={castBill} fireBill={fireBill}/>
     </div>
   );
 }
-
-export default App;

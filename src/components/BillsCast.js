@@ -1,13 +1,14 @@
 import React from 'react';
+import BillCard from './BillCard';
 
-export default function BillsCast({ casts = [], enlist }) {
-  console.log(casts)
+export default function BillsCast( { bills, removeBill, fireBill }) {
 
   return (
     <div className="ui segment inverted blue bill-cast">
       <div className="ui five column grid">
         <div className="row bill-cast-row">
-        {/* {enlist ? null : <img src={bill.photo} alt={bill.name} width="100%" /> } */}
+        {bills.map(bill => 
+        <BillCard key={bill.id} bill={bill} handleClick={removeBill} fireBill={fireBill}/>)}
         </div>
       </div>
     </div>

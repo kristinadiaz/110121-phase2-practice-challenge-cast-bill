@@ -1,16 +1,14 @@
 import React from 'react';
-import BillSpecs from './BillSpecs';
+import BillCard from './BillCard';
 
-export default function BillCollection({ bill, clickBill }) {
-  // console.log(bill)
+export default function BillCollection({ bills, castBill, fireBill }) {
+  // console.log(bills)
 
   return (
     <div className="ui four column grid">
       <div className="row">
-        {
-          bill.map((bill) => 
-          <BillSpecs key={bill.id} bill={bill} handleClick={clickBill}/>
-          )}
+        {bills.map(bill => 
+        <BillCard key={bill.id} bill={bill} handleClick={castBill} fireBill={fireBill}/>)}
       </div>
     </div>
   );
